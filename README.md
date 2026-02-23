@@ -97,3 +97,18 @@ curl -sS -X POST http://localhost:8080/api/repos/<REPO_ID>/pull-requests \
   -H "Content-Type: application/json" \
   -d '{"title":"Argus: Fix findings","confirm":false,"max_fixes":10}'
 ```
+
+
+## Restricted-network builds
+
+If your CI/host cannot reach Go module mirrors or GitHub, use vendoring from an unrestricted machine and then build in vendor mode.
+
+- Full guide: `VENDORING.md`
+- Quick check script: `scripts/check_vendor_state.sh`
+
+Example restricted-host commands:
+
+```bash
+cd api && go test -mod=vendor ./...
+cd ../worker && go test -mod=vendor ./...
+```
